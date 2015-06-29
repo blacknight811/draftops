@@ -21,7 +21,6 @@ angular.module('appDraftops')
         var deferred = $q.defer();
         $http.get(baseUrl, {params: params})
           .success(function (res) {
-            //console.log(res);
             deferred.resolve(res.Data)
         })
           .error(function (err) {

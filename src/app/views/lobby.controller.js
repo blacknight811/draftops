@@ -15,7 +15,6 @@ angular.module('appDraftops')
       $scope.loading = true;
       LobbyFactory.getLobby().then(
         function (res) {
-          console.log(res);
           $scope.contests = res;
 
           $scope.contests.forEach(function (contest) {
@@ -29,7 +28,7 @@ angular.module('appDraftops')
         }
       ).finally(function () {
           $scope.loading = false;
-          checkWidth();
+          $scope.checkWidth();
         });
     };
 
