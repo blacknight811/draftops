@@ -1,0 +1,62 @@
+<div class="draft-ops-lobby">
+  <div ng-include="'app/components/navbar/navbar.html'"></div>
+  <div class="container">
+
+
+
+    <div class="panel panel-default">
+      <div class="panel-heading lobby-heading clearfix">
+        <label>Choose Sport</label><br/>
+        <div class="btn-group pull-left">
+          <button class="btn btn-sm ">ANY</button>
+          <button class="btn btn-sm">MMA</button>
+          <button class="btn btn-sm">MLB</button>
+          <button class="btn btn-sm">NFL</button>
+          <button class="btn btn-sm">NBA</button>
+          <button class="btn btn-sm">NHL</button>
+        </div>
+        <div>
+
+        </div>
+      </div>
+      <div id="contest-body" class="panel-body lobby-body">
+        <div class="row mission-row">
+          <span class="col-md-5 col-sm-10 col-xs-10 "><h2>{{contests.length}} Missions</h2></span>
+          <div class="col-md-6 form-inline hidden-sm hidden-xs">
+            <input type="text" ng-model="searchText" class="form-control" placeholder="Find Missions by keywords"/>
+          </div>
+          <div class="col-md-1">
+            <i class="refresh glyphicon glyphicon-refresh pull-right" ng-click="getData()"></i>
+          </div>
+        </div>
+        <div ng-if="message" class="alert alert-danger">{{message}}</div>
+        <div class="row title-row hidden-sm hidden-xs">
+          <span class="col-sm-6 border-right">Title</span>
+          <span ng-show="isLoggedIn" class="col-sm-1 border-right">Curr Entries</span>
+          <span class="col-sm-1 border-right">Max</span>
+          <span class="col-sm-1 border-right">Entry</span>
+          <span class="col-sm-1 border-right">Prizes</span>
+          <span class="col-sm-2 text-right">Starts</span>
+        </div>
+        <div class="row contest-row" ng-repeat="contest in contests | filter:searchText">
+          <span class="col-md-6 col-sm-12 col-xs-12 contest-name">{{contest.Name}} <i tooltip-placement="left" tooltip="{{guaranteedTooltip}}" class="badge pull-right" ng-if="contest.Type === 'guaranteed'">G</i></span>
+          <span ng-show="isLoggedIn" class="col-md-1 col-sm-2 col-xs-6 mission-data">{{contest.CurrentEntries}} <span class="hidden-lg hidden-md">Entries</span></span>
+          <span class="col-md-1 col-sm-3 col-xs-12 text-right" ng-class="{'col-xs-6': isLoggedIn }">{{contest.MaxEntries}} <span class="hidden-lg hidden-md">Max Entries</span></span>
+          <span class="col-md-1 col-sm-3 col-xs-12 text-right mission-data">{{contest.EntryPrice | currency}}<span class="hidden-lg hidden-md">Entry Price</span></span>
+          <span class="col-md-1 col-sm-3 col-xs-12 text-right mission-data">{{contest.PrizeAmount | currency}} <span class="hidden-lg hidden-md">Prizes</span></span>
+          <span class="col-md-2 hidden-sm col-xs-12 text-right mission-data no-wrap">Locks: in {{contest.lockDateTicks | date: 'M/d h:mm a'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="footer">
+      <p>With ♥ from <a href="https://twitter.com/bknightent">@bknightent</a></p>
+    </div>
+
+  </div>
+
+</div>
+
+
